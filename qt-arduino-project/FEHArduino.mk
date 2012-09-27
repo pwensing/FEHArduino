@@ -282,12 +282,12 @@ OBJDIR  	  = build
 ##############################################################################
 # Local sources
 #
-# Wensing (9/26/2012): For non-deploy targets, the lines below only 
+# Wensing (9/26/2012): For non-full builds, the lines below only 
 #                      grab the c and cpp sources that are listed in the 
 #                      projects ".files" file. EGREP does a regexp match to find
 #                      all lines of $(TARGET).files that end in .c or .cpp
 
-ifdef DEPLOY
+ifdef FULL_BUILD
 LOCAL_C_SRCS    = $(wildcard *.c)
 LOCAL_CPP_SRCS  = $(wildcard *.cpp)
 else
@@ -327,15 +327,15 @@ CORE_OBJS       = $(patsubst $(ARDUINO_CORE_PATH)/%,  \
 			$(OBJDIR)/%,$(CORE_OBJ_FILES))
 
 # Wensing (9/26/2012): This kills the dependencies on these files, so we don't try to
-#                      build them if not deploying
-ifndef DEPLOY
+#                      build them if not full building
+ifndef FULL_BUILD
 CORE_OBJS =
 endif
 
 endif
 endif
 
-# Wensing (9/26/2012): New definitions for the FEH Core. Only used in the deploy Makefile
+# Wensing (9/26/2012): New definitions for the FEH Core. Only used in the full build
 FEH_CORE_CPP_SRCS = $(wildcard $(FEH_CORE_PATH)/*.cpp)
 FEH_CORE_OBJ_FILES = $(FEH_CORE_CPP_SRCS:.cpp=.o)
 FEH_CORE_OBJS       = $(patsubst $(FEH_CORE_PATH)/%,  \
@@ -345,8 +345,8 @@ CRT_LIB = $(FEH_CORE_PATH)/crtm328p_mod.o
 CRT_S = $(FEH_CORE_PATH)/crt/gcrt1.S
 
 # Wensing (9/26/2012): This kills the dependencies on these files, so we don't try to
-#                      build them if not deploying
-ifndef DEPLOY
+#                      build them if not fullly building
+ifndef FULL_BUILD
 FEH_CORE_OBJS =
 endif
 
@@ -390,8 +390,8 @@ LIB_OBJS      = $(patsubst $(ARDUINO_LIB_PATH)/%.c,$(OBJDIR)/libs/%.o,$(LIB_C_SR
 		$(patsubst $(ARDUINO_LIB_PATH)/%.cpp,$(OBJDIR)/libs/%.o,$(LIB_CPP_SRCS))
 
 # Wensing (9/26/2012): This kills the dependencies on these files, so we don't try to
-#                      build them if not deploying
-ifndef DEPLOY
+#                      build them if not fully building
+ifndef FULL_BUILD
 LIB_OBJS =
 endif
 
@@ -553,7 +553,7 @@ $(TARGET_ELF): 	$(LOCAL_OBJS) $(FEH_CORE_LIB) $(OTHER_OBJS) $(CRT_LIB)
 # Wensing (9/26/2012): This command to compile CRT_LIB came from the make process for crtm328p.o found in the avr-libc-1.7.1 source
 # the make process for crtm328p.o had to be configured, but was done so with the default ./configure for avr-libc-1.7.1		
 $(CRT_LIB):
-ifdef DEPLOY
+ifdef FULL_BUILD
 		$(CC) -I. -x assembler-with-cpp -Wa,-gstabs -mmcu=$(MCU) -c -o $(CRT_LIB) $(CRT_S)
 else
 		$(ECHO) No CRT Action
@@ -561,7 +561,7 @@ endif
 
 
 $(FEH_CORE_LIB): $(FEH_CORE_OBJS) $(CORE_OBJS) $(LIB_OBJS)
-ifdef DEPLOY
+ifdef FULL_BUILD
 		 $(AR) rcs $@ $(FEH_CORE_OBJS) $(CORE_OBJS) $(LIB_OBJS)
 else
 		$(ECHO) No FEH Core Action
@@ -606,7 +606,7 @@ ispload:	$(TARGET_HEX)
 			-U lock:w:$(ISP_LOCK_FUSE_POST):m
 
 clean:
-ifdef DEPLOY
+ifdef FULL_BUILD
 		$(REMOVE) $(LOCAL_OBJS) $(CORE_OBJS) $(FEH_CORE_OBJS) $(LIB_OBJS) $(FEH_CORE_LIB) $(TARGETS) $(CRT_LIB)
 else
 		$(REMOVE) $(LOCAL_OBJS) $(TARGETS)
