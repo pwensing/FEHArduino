@@ -48,21 +48,17 @@ leave room for the Qt 4 target page.
     <fieldpagetitle>Arduino Parameters</fieldpagetitle>
     <fields>
         <field mandatory="true" name="QT_SDK_PATH">
-            <fieldcontrol class="QLineEdit" defaulttext="C:/QtSDK" />
+            <fieldcontrol class="QLineEdit" defaulttext="C:\QtSDK" />
             <fielddescription>QtSDK Location:</fielddescription>
         </field>
         <field mandatory="true" name="ARDUINO_PATH">
-            <fieldcontrol class="QLineEdit" defaulttext="C:/apps/arduino" />
+            <fieldcontrol class="QLineEdit" defaulttext="C:\Program Files (x86)\arduino" />
             <fielddescription>Arduino Root Location:</fielddescription>
         </field>
         <field mandatory="true" name="PUTTY_EXE">
-            <fieldcontrol class="QLineEdit" defaulttext="C:/apps/putty.exe" />
+            <fieldcontrol class="QLineEdit" defaulttext="C:\apps\Putty\putty.exe" />
             <fielddescription>Putty.exe Location:</fielddescription>
         </field>
-<!--	<field mandatory="true" name="PUTTY_EXE2">
-            <fieldcontrol class="Utils::PathChooser" defaultText="C:\\apps\\putty.exe" />
-            <fielddescription>Putty.exe Location:</fielddescription>
-        </field> -->
     </fields>
 
     <files>

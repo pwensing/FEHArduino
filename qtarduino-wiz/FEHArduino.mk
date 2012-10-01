@@ -398,7 +398,7 @@ endif
 
 # Wensing (0/26/2012): Modified to include FEH headers
 CPPFLAGS      = -mmcu=$(MCU) -DF_CPU=$(F_CPU) -DARDUINO=$(ARDUINO_VERSION) \
-			-I. -I$(ARDUINO_CORE_PATH) -I$(ARDUINO_VAR_PATH)/$(VARIANT) \
+			-I. -I'$(ARDUINO_CORE_PATH)' -I'$(ARDUINO_VAR_PATH)/$(VARIANT)' \
 			$(SYS_INCLUDES) -g -Os -w -Wall \
 			-ffunction-sections -fdata-sections -I $(FEH_CORE_PATH)
 CFLAGS        = -std=gnu99
@@ -514,7 +514,7 @@ endif
 
 AVRDUDE_COM_OPTS = -q -V -p $(MCU)
 ifdef AVRDUDE_CONF
-AVRDUDE_COM_OPTS += -C $(AVRDUDE_CONF)
+AVRDUDE_COM_OPTS += -C '$(AVRDUDE_CONF)'
 endif
 
 AVRDUDE_ARD_OPTS = -c $(AVRDUDE_ARD_PROGRAMMER) -b $(AVRDUDE_ARD_BAUDRATE) -P $(ARD_PORT) $(AVRDUDE_ARD_EXTRAOPTS)
@@ -543,11 +543,11 @@ $(OBJDIR):
 $(TARGET_ELF): 	$(LOCAL_OBJS) $(FEH_CORE_LIB) $(OTHER_OBJS) $(CRT_LIB)
 		$(HARDWARE_TOOLS_PATH)/avr/avr/bin/ld.exe -m avr5 -Tdata 0x800100 -o $@ \
 			$(CRT_LIB) \
-			-L$(HARDWARE_TOOLS_PATH)/avr/lib/gcc/avr/4.3.2/avr5 \
-			-L$(HARDWARE_TOOLS_PATH)\avr\avr\lib\avr5 \
-			-L$(HARDWARE_TOOLS_PATH)/avr/lib/gcc/avr/4.3.2 \
-			-L$(HARDWARE_TOOLS_PATH)/avr/lib/gcc \
-			-L$(HARDWARE_TOOLS_PATH)/avr/avr/lib \
+			-L'$(HARDWARE_TOOLS_PATH)/avr/lib/gcc/avr/4.3.2/avr5' \
+			-L'$(HARDWARE_TOOLS_PATH)\avr\avr\lib\avr5' \
+			-L'$(HARDWARE_TOOLS_PATH)/avr/lib/gcc/avr/4.3.2' \
+			-L'$(HARDWARE_TOOLS_PATH)/avr/lib/gcc' \
+			-L'$(HARDWARE_TOOLS_PATH)/avr/avr/lib' \
 			--gc-sections -u vfprintf -lprintf_flt $(LOCAL_OBJS) $(FEH_CORE_LIB) $(OTHER_OBJS) -lc -lm -lgcc -lc -lgcc
 
 # Wensing (9/26/2012): This command to compile CRT_LIB came from the make process for crtm328p.o found in the avr-libc-1.7.1 source
@@ -626,3 +626,4 @@ size:		$(OBJDIR) $(TARGET_HEX)
 #$(DEP_FILE):	$(OBJDIR) $(DEPS)
 #		$(CAT) $(DEPS) > $(DEP_FILE)
 #include $(DEP_FILE)
+
