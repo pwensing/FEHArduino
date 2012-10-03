@@ -48,7 +48,7 @@ leave room for the Qt 4 target page.
     <fieldpagetitle>Arduino Parameters</fieldpagetitle>
     <fields>
         <field mandatory="true" name="QT_SDK_PATH">
-            <fieldcontrol class="QLineEdit" defaulttext="C:\QtSDK" />
+            <fieldcontrol class="QLineEdit" defaulttext="C:\apps\QtSDK" />
             <fielddescription>QtSDK Location:</fielddescription>
         </field>
         <field mandatory="true" name="ARDUINO_PATH">
@@ -70,7 +70,6 @@ leave room for the Qt 4 target page.
 	<file source="Qt-Arduino-Project.includes" target="%ProjectName%.includes" openeditor="false"/>
 	<file source="FEHArduino/libfeharduino.a" openeditor="false" binary="true"/>
 	<file source="FEHArduino/crtm328p_mod.o" openeditor="false" binary="true"/>
-	<file source="FEHArduino/FEHArduino.h" openeditor="false"/>
 	<file source="FEHArduino/FEHDigitalIO.h" openeditor="false"/>
 	<file source="FEHArduino/FEHSerialIO.h" openeditor="false"/>
 	<file source="FEHArduino/FEHTime.h" openeditor="false"/>
