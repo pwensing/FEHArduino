@@ -1,27 +1,10 @@
-#include "FEHArduino.h"
-#include "FEHSerialIO.h"
-#include "FEHTime.h"
+#include <FEHSerialIO.h>
+#include <FEHTime.h>
+#include <FEHDigitalIO.h>
+
 int ledPin =  13;    // LED connected to digital pin 13
-
-/*void setup() {
-    Serial.begin(9600);
-    pinMode(ledPin, OUTPUT);
-}
-
-void loop() {
-    digitalWrite(ledPin, HIGH);   // set the LED on
-    delay(500);                   // wait for half a second
-    digitalWrite(ledPin, LOW);    // set the LED off
-    delay(500);                   // wait for half a second
-    Serial.println("Hey!");
-
-}*/
-
-
-
 int main()
 {
-    SerialInitialize( 9600 );
     for(;;) {
         int integer = 5;
         Serialprintf( "I'm a char %c and an int %d\r\n", 'x', integer );
@@ -36,8 +19,12 @@ int main()
         Serialprintf( "pad %4d\r\n", integer );
         Serialprintf( "pad %5d\r\n", integer );
         Serialprintf( "pad %6d\r\n", integer );
+        Serialprintf( "We've been doing this for %f seconds\r\n", TimeNow());
         Serialprintf( "And repeat!\r\n" );
-        delay( 1000 );
+        DigitalWrite(ledPin,true);
+        Sleep(.5 );
+        DigitalWrite(ledPin,false);
+        Sleep(.5);
     }
 
 

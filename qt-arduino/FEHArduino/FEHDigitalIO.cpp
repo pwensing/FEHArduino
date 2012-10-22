@@ -1,5 +1,5 @@
 #include "FEHArduino.h"
-
+#include "FEHSerialIO.h"
 #include "FEHDigitalIO.h"
 
 // Set the specified pin as a digital output
@@ -20,11 +20,12 @@ bool SetDigitalMode( unsigned int pinnumber, DigitalMode mode )
 {
     if( mode == DIGITAL_INPUT)
     {
-        pinMode(pinnumber, OUTPUT);
+        pinMode(pinnumber, INPUT);
+        digitalWrite(pinnumber,HIGH);
     }
     else
     {
-        pinMode(pinnumber,INPUT);
+        pinMode(pinnumber,OUTPUT);
     }
 }
 

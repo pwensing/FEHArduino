@@ -9,6 +9,6 @@ void Sleep(float seconds)
 
 float TimeNow()
 {
-    int milliTime = millis();
+    unsigned long milliTime = millis();
     return milliTime/1000.;
 }

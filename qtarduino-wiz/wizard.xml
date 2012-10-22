@@ -70,7 +70,6 @@ leave room for the Qt 4 target page.
 	<file source="Qt-Arduino-Project.includes" target="%ProjectName%.includes" openeditor="false"/>
 	<file source="FEHArduino/libfeharduino.a" openeditor="false" binary="true"/>
 	<file source="FEHArduino/crtm328p_mod.o" openeditor="false" binary="true"/>
-	<file source="FEHArduino/FEHArduino.h" openeditor="false"/>
 	<file source="FEHArduino/FEHDigitalIO.h" openeditor="false"/>
 	<file source="FEHArduino/FEHSerialIO.h" openeditor="false"/>
 	<file source="FEHArduino/FEHTime.h" openeditor="false"/>

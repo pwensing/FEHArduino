@@ -14,10 +14,10 @@ bool SerialInitialize( unsigned int baudrate )
 
 void Serialprintf( const char* string, ... )
 {
-        char tmp[ 128 ]; // resulting string limited to 128 chars
+        char tmp[ 512 ]; // resulting string limited to 128 chars
         va_list args;
         va_start( args, string );
-        vsnprintf( tmp, 128, string, args );
+        vsnprintf( tmp, 512, string, args );
         va_end( args );
         Serial.print( tmp );
 }
