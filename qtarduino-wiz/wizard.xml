@@ -40,7 +40,7 @@ leave room for the Qt 4 target page.
 <wizard version="1" kind="project" class="qt4project" firstpage="10"
         id="A.FEHArduino" category="B.CustomProjects">
     <icon>console.png</icon>
-    <description>Creates a template Arduino project with basic digital and serial I/O.</description>
+    <description>Creates a template Arduino project for basic digital I/O, serial I/O, and timing.</description>
     <displayname>FEH Arduino</displayname>;
     <displaycategory>Custom Projects</displaycategory>
 
@@ -48,7 +48,7 @@ leave room for the Qt 4 target page.
     <fieldpagetitle>Arduino Parameters</fieldpagetitle>
     <fields>
         <field mandatory="true" name="QT_SDK_PATH">
-            <fieldcontrol class="QLineEdit" defaulttext="C:\QtSDK" />
+            <fieldcontrol class="QLineEdit" defaulttext="C:\apps\QtSDK" />
             <fielddescription>QtSDK Location:</fielddescription>
         </field>
         <field mandatory="true" name="ARDUINO_PATH">

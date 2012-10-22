@@ -534,7 +534,7 @@ AVRDUDE_ISP_OPTS = -P $(ISP_PORT) $(ISP_PROG)
 all: 		$(OBJDIR) $(TARGET_HEX)
 
 $(OBJDIR):
-		mkdir $(OBJDIR)
+		$(MKDIR) $(OBJDIR)
 
 # Wensing (9/26/2012): This command for the target elf came from running
 # $(LD) $(LDFLAGS) -v -o $@ $(LOCAL_OBJS) $(FEH_CORE_LIB) $(OTHER_OBJS) -lc -lm  
@@ -626,4 +626,5 @@ size:		$(OBJDIR) $(TARGET_HEX)
 #$(DEP_FILE):	$(OBJDIR) $(DEPS)
 #		$(CAT) $(DEPS) > $(DEP_FILE)
 #include $(DEP_FILE)
+
 
