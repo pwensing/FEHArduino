@@ -8,3 +8,4 @@ FEHArduino/FEHTime.h
 FEHArduino/FEHTime.cpp
 FEHArduino/FEHDigitalIO.cpp
 main.cpp
+FEHArduino.mk

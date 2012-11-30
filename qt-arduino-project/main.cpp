@@ -1,6 +1,8 @@
 #include <FEHSerialIO.h>
 #include <FEHDigitalIO.h>
+
 int main() {
+
     //Configure Necessary Pins
     SetDigitalOutput(2);
     SetDigitalInput(4);

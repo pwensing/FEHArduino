@@ -207,7 +207,7 @@ endif
 # Wensing (9/26/2012): Uses Mike Veriers com port finder program to look up 
 #                      the COM port based on vendor and product ID
 ifndef ARD_PORT
-ARD_PORT = $(shell $(PORT_FINDER) --vendorid=$(VENDOR_ID) --productid=$(PRODUCT_ID))
+ARD_PORT = $(shell $(PORT_FINDER) --vendorid=$(VENDOR_ID) --productid=$(PRODUCT_ID))	
 endif
 
 
@@ -378,7 +378,7 @@ REMOVE  = rm -f
 MV      = mv -f
 MKDIR     = $(ARDUINO_DIR)\hardware\tools\avr\utils\bin\mkdir
 CAT     = $(ARDUINO_DIR)\hardware\tools\avr\utils\bin\cat
-ECHO    = $(ARDUINO_DIR)\hardware\tools\avr\utils\bin\echo
+ECHO    = $(ARDUINO_DIR)\hardware\tools\avr\utils\bin/echo.exe
 
 
 # General arguments
@@ -509,7 +509,7 @@ $(OBJDIR)/%.sym: $(OBJDIR)/%.elf
 # Avrdude
 #
 ifndef AVRDUDE
-AVRDUDE          = $(AVR_TOOLS_PATH)/avrdude
+AVRDUDE          = $(AVR_TOOLS_PATH)/avrdude.exe
 endif
 
 AVRDUDE_COM_OPTS = -q -V -p $(MCU)
@@ -577,11 +577,14 @@ com_reg:    	reg_import reg_modify
 reg_import:
 		reg import $(PUTTY_CONF)
 reg_modify:
+ifeq (,$(findstring COM,$(ARD_PORT))) 
+		$(error Arduino not found. Please plug in an Arduino to the USB) 
+endif
 		reg add HKCU\Software\SimonTatham\PuTTY\Sessions\Arduino /v SerialLine /t REG_SZ /d $(ARD_PORT) /f
 
-raw_upload:	$(TARGET_HEX) com_reg 
+raw_upload:	$(TARGET_HEX) com_reg
 		$(AVRDUDE) $(AVRDUDE_COM_OPTS) $(AVRDUDE_ARD_OPTS) \
-			-U flash:w:$(TARGET_HEX):i
+			-U flash:w:$(TARGET_HEX):i 
 
 # BSD stty likes -F, but GNU stty likes -f/--file.  Redirecting
 # stdin/out appears to work but generates a spurious error on MacOS at
@@ -626,5 +629,6 @@ size:		$(OBJDIR) $(TARGET_HEX)
 #$(DEP_FILE):	$(OBJDIR) $(DEPS)
 #		$(CAT) $(DEPS) > $(DEP_FILE)
 #include $(DEP_FILE)
+
 
 
